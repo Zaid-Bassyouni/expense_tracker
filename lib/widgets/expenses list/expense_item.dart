@@ -28,7 +28,7 @@ class ExpenseItem extends StatelessWidget {
                 Row(
                   children: [
                     Icon(Icons.calendar_today),
-                    const SizedBox(width: 8.0),
+                    const SizedBox(width: 10.0),
                     //Text('${expense.date.day}/${expense.date.month}/${expense.date.year}'),
                     Text(expense.date.toString()),
                     // Date Picker
