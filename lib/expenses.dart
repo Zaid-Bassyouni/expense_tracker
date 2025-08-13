@@ -202,6 +202,12 @@ class _ExpensesState extends State<Expenses> {
 
   @override
   Widget build(BuildContext context) {
+    Widget mainContent = const Center(child: Text('No Expenses found. Start adding some!'));
+
+    if (_registeredExpenses.isNotEmpty) {
+      mainContent = ExpensesList(expenses: _registeredExpenses, onDeleteExpense: _deleteExpense);
+    }
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color.fromARGB(146, 243, 74, 74),
@@ -214,7 +220,7 @@ class _ExpensesState extends State<Expenses> {
           // Text('Expenses Tracker App', style: Theme.of(context).textTheme.headlineMedium),
           //Text('Chart...', style: Theme.of(context).textTheme.headlineMedium),
           //TODO: Add a chart here.
-          Expanded(child: ExpensesList(expenses: _registeredExpenses, onDeleteExpense: _deleteExpense)),
+          Expanded(child: mainContent),
         ],
       ),
     );
