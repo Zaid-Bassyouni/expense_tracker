@@ -37,6 +37,27 @@ class _ExpensesState extends State<Expenses> {
     });
   }
 
+  void _deleteExpense(Expense expense) {
+    final expenseIndex = _registeredExpenses.indexOf(expense);
+    setState(() {
+      _registeredExpenses.remove(expense);
+    });
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text('${expense.title} deleted!'),
+        duration: const Duration(seconds: 2),
+        action: SnackBarAction(
+          label: 'Undo',
+          onPressed: () {
+            setState(() {
+              _registeredExpenses.insert(expenseIndex, expense);
+            });
+          },
+        ),
+      ),
+    );
+  }
+
   void _submitExpenseData() {
     //in case of empty input, show a error dialog.
     if (entredTitleValue.trim().isEmpty || entredAmountValue.trim().isEmpty || _selectedDate == null) {
@@ -193,7 +214,7 @@ class _ExpensesState extends State<Expenses> {
           // Text('Expenses Tracker App', style: Theme.of(context).textTheme.headlineMedium),
           //Text('Chart...', style: Theme.of(context).textTheme.headlineMedium),
           //TODO: Add a chart here.
-          Expanded(child: ExpensesList(expenses: _registeredExpenses)),
+          Expanded(child: ExpensesList(expenses: _registeredExpenses, onDeleteExpense: _deleteExpense)),
         ],
       ),
     );
