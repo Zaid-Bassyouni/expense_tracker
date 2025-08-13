@@ -9,12 +9,13 @@ class ExpenseItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      color: const Color.fromARGB(159, 255, 172, 172),
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 5.0),
+        padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(expense.title),
+            Text(expense.title, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0)),
             const SizedBox(height: 4.0),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -27,20 +28,10 @@ class ExpenseItem extends StatelessWidget {
                 const Spacer(),
                 Row(
                   children: [
-                    Icon(Icons.calendar_today),
-                    const SizedBox(width: 8.0),
+                    Icon(categoryIcons[expense.category]),
+                    const SizedBox(width: 10.0),
                     //Text('${expense.date.day}/${expense.date.month}/${expense.date.year}'),
-                    Text(expense.date.toString()),
-                    // Date Picker
-                    // TextField(
-                    //   decoration: InputDecoration(
-                    //     labelText: 'Date',
-                    //     border: OutlineInputBorder(),
-                    //     filled: true,
-                    //     prefix: Icon(Icons.calendar_month),
-                    //     enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.grey.shade400)),
-                    //   ),
-                    // ),
+                    Text(expense.formattedDate), //we dont use () bcuz it is getter not a method.
                   ],
                 ),
               ],
